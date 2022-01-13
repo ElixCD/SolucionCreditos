@@ -1,0 +1,31 @@
+﻿
+@model List<ClienteViewModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="mb-3">
+    <a class="btn btn-info" asp-controller="Clientes" asp-action="Crear" asp-route-id="@ViewBag.idCliente">Nuevo Cliente</a>
+</div>
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Cliente</th>
+            <th>Cuentas</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.IdCliente</td>
+                <td>@item.NombreCompleto</td>
+                <td><a class="btn btn-info" asp-controller="Cuentas" asp-action="Index" asp-route-id="@item.IdCliente">Ver cuentas</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

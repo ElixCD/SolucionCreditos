@@ -1,0 +1,32 @@
+﻿
+@using SolucionCreditos.Entities;
+@model List<TipoMovimiento>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="mb-3">
+    <a class="btn btn-info" asp-controller="TipoMovimientos" asp-action="Crear" asp-route-id="@ViewBag.idCliente">Nuevo Cliente</a>
+</div>
+
+<table class="table">
+    <thead class="table-dark">
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Entrada</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.IdTipoMovimiento</td>
+            <td>@item.Nombre</td>
+            <td>@item.Entrada</td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+

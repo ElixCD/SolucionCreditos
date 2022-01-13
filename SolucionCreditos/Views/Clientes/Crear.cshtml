@@ -1,0 +1,20 @@
+﻿@using SolucionCreditos.Entities
+
+@model Cliente
+
+
+<form method="post">
+    <div>
+        <div class="form-group">
+            <label>Nombre</label>
+            <input class="form-control" asp-for="Nombre" />
+        </div>
+
+        <div class="form-group">
+            <label>Apellido</label>
+            <input class="form-control" asp-for="Apellido" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+</form>
