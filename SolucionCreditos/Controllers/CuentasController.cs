@@ -21,7 +21,7 @@ namespace SolucionCreditos.Controllers
             ViewBag.idCliente = idCliente;
             CuentaBusiness cuentaBusiness = new CuentaBusiness();
 
-            List<Cuenta> cuentas = cuentaBusiness.ListarCuentas(idCliente).Select(c => c).ToList();
+            List<Cuenta> cuentas = cuentaBusiness.ListarCuentasPorCliente(idCliente).Select(c => c).ToList();
 
             return View(cuentas);
         }
@@ -29,6 +29,8 @@ namespace SolucionCreditos.Controllers
         
         public IActionResult Crear()
         {
+            Int64 idCliente = Int64.Parse(RouteData.Values["id"].ToString());
+            ViewBag.idCliente = idCliente;
             return  View();
         }
 
@@ -36,10 +38,12 @@ namespace SolucionCreditos.Controllers
         public IActionResult Crear(Cuenta cuenta)
         {
             Int64 idCliente = Int64.Parse(RouteData.Values["id"].ToString());
+            ViewBag.idCliente = idCliente;
+
             CuentaBusiness cuentaBusiness = new CuentaBusiness();
             cuentaBusiness.GuardarCuenta(cuenta, idCliente);
 
-            List<Cuenta> cuentas = cuentaBusiness.ListarCuentas(idCliente).Select(c => c).ToList();
+            List<Cuenta> cuentas = cuentaBusiness.ListarCuentasPorCliente(idCliente).Select(c => c).ToList();
 
             return View("Index", cuentas);
         }

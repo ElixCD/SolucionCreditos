@@ -26,7 +26,7 @@ namespace SolucionCreditos.Business
         }
 
 
-        public List<Cuenta> ListarCuentas(Int64 idCliente)
+        public List<Cuenta> ListarCuentasPorCliente(Int64 idCliente)
         {
             return this.cuentaContext.ListarCuentasPorCliente(idCliente);
         }
