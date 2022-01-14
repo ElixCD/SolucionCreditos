@@ -7,14 +7,16 @@
     <div>
         <div class="form-group">
             <label>Nombre</label>
-            <input class="form-control" asp-for="Nombre" required/>
+            <input type="text" class="form-control" asp-for="Nombre" required />
         </div>
 
         <div class="form-group">
             <label>Apellido</label>
-            <input class="form-control" asp-for="Apellido" required/>
+            <input type="text" class="form-control" asp-for="Apellido" required />
         </div>
 
         <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-secondary" asp-action="Index">Cancelar</a>
+
     </div>
 </form>

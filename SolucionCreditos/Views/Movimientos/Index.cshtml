@@ -2,10 +2,8 @@
 @model List<Movimiento>
 
 <div class="mb-3">
-
-    <a class="btn btn-primary" asp-controller="Cuentas" asp-action="Index" asp-route-id="@ViewBag.idCliente">Volver</a>
-
     <a class="btn btn-primary" asp-action="NuevoMovimiento" asp-route-id="@ViewBag.idCuenta">Nuevo Movimiento</a>
+    <a class="btn btn-secondary" asp-controller="Cuentas" asp-action="Index" asp-route-id="@ViewBag.idCliente">Volver</a>
 </div>
 
 <table class="table">

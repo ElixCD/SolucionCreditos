@@ -7,14 +7,16 @@
     <div>
         <div class="form-group">
             <label>Numero de cuenta</label>
-            <input class="form-control" asp-for="NumeroCuenta" required />
+            <input type="text" class="form-control" asp-for="NumeroCuenta" required />
         </div>
 
         <div class="form-group">
             <label>Saldo</label>
-            <input class="form-control" asp-for="Saldo"  required />
+            <input type="number" class="form-control" asp-for="Saldo"  step="0.01" min="0" required />
         </div>
 
         <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-secondary" asp-controller="Cuentas" asp-action="Index">Cancelar</a>
+
     </div>
 </form>

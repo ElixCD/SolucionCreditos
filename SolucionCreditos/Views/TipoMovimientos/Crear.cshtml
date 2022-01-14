@@ -7,7 +7,7 @@
     <div>
         <div class="form-group">
             <label>Nombre</label>
-            <input class="form-control" asp-for="Concepto" required/>
+            <input class="form-control" asp-for="Concepto" required />
         </div>
 
         <div class="form-group">
@@ -16,5 +16,7 @@
         </div>
 
         <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-secondary" asp-controller="TipoMovimientos" asp-action="Index">Cancelar</a>
+
     </div>
 </form>

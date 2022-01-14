@@ -2,9 +2,8 @@
 @using SolucionCreditos.Entities;
 
 <div class="mb-3">
-    <a class="btn btn-primary" asp-controller="Clientes" asp-action="Index" asp-route-id="@ViewBag.idCliente">Volver</a>
-
     <a class="btn btn-info" asp-controller="Cuentas" asp-action="Crear" asp-route-id="@ViewBag.idCliente">Crear cuenta</a>
+    <a class="btn btn-secondary" asp-controller="Clientes" asp-action="Index" asp-route-id="@ViewBag.idCliente">Volver</a>
 </div>
 
 <table class="table">

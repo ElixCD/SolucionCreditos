@@ -16,7 +16,7 @@ namespace SolucionCreditos.Controllers
             ViewBag.idCuenta = idCuenta;
 
             CuentaBusiness cuentaBusiness = new CuentaBusiness();
-            var cuenta = cuentaBusiness.ObtenerCuentasPorId(idCuenta);
+            var cuenta = cuentaBusiness.ObtenerCuentasPorId(idCuenta); 
             Int64 idCliente = cuentaBusiness.ObtenerCuentasPorId(idCuenta).IdCliente;
             ViewBag.idCliente = idCliente;
 
