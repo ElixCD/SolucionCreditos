@@ -17,13 +17,13 @@ namespace SolucionCreditos.Entities
 
         [Required]
         public double Saldo { get; set; }
-
-        [ForeignKey("Cliente")]
+       
         public Int64 IdCliente { get; set; }
+
+        [ForeignKey("IdCliente")]
+        public Cliente Cliente { get; set; }
         
-        public virtual Cliente Cliente { get; set; }
-        
-        public virtual List<Movimiento> Movimientos { get; set; }
+        public List<Movimiento> Movimientos { get; set; }
 
     }
 }

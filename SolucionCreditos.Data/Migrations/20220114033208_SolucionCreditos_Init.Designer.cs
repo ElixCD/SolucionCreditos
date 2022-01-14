@@ -9,8 +9,8 @@ using SolucionCreditos.Data;
 namespace SolucionCreditos.Data.Migrations
 {
     [DbContext(typeof(SolucionCreditoContext))]
-    [Migration("20220113211618_SolucionesCreditoDB")]
-    partial class SolucionesCreditoDB
+    [Migration("20220114033208_SolucionCreditos_Init")]
+    partial class SolucionCreditos_Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -77,8 +77,8 @@ namespace SolucionCreditos.Data.Migrations
                     b.Property<int>("IdTipoMovimiento")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Monto")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<double>("Monto")
+                        .HasColumnType("float");
 
                     b.HasKey("IdMovimiento");
 
@@ -96,9 +96,12 @@ namespace SolucionCreditos.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Nombre")
+                    b.Property<string>("Concepto")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Deposito")
+                        .HasColumnType("bit");
 
                     b.HasKey("IdTipoMovimiento");
 
@@ -123,7 +126,7 @@ namespace SolucionCreditos.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("SolucionCreditos.Entities.TipoMovimiento", "TipoMovimiento")
-                        .WithMany()
+                        .WithMany("Movimientos")
                         .HasForeignKey("IdTipoMovimiento")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

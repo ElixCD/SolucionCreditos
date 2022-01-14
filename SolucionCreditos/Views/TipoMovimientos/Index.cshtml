@@ -6,7 +6,7 @@
 }
 
 <div class="mb-3">
-    <a class="btn btn-info" asp-controller="TipoMovimientos" asp-action="Crear" asp-route-id="@ViewBag.idCliente">Nuevo Cliente</a>
+    <a class="btn btn-info" asp-controller="TipoMovimientos" asp-action="Crear" asp-route-id="@ViewBag.idCliente">Nuevo nuevopo de movimiento</a>
 </div>
 
 <table class="table">
@@ -22,8 +22,8 @@
         {
         <tr>
             <td>@item.IdTipoMovimiento</td>
-            <td>@item.Nombre</td>
-            <td>@item.Entrada</td>
+            <td>@item.Concepto</td>
+            <td>@item.Deposito</td>
         </tr>
         }
     </tbody>

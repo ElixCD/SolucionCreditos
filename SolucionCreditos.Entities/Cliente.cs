@@ -15,6 +15,6 @@ namespace SolucionCreditos.Entities
         [Required]
         public string Apellido { get; set; }
 
-        public virtual List<Cuenta> Cuentas { get; set; }
+        public List<Cuenta> Cuentas { get; set; }
     }
 }

@@ -12,16 +12,22 @@ namespace SolucionCreditos.Entities
         public Int64 IdMovimiento { get; set; }
 
         [Required]
-        public decimal Monto { get; set; }
+        public double Monto { get; set; }
 
-        [ForeignKey("Cuenta")]
         public Int64 IdCuenta { get; set; }
 
-        [ForeignKey("TipoMovimiento")]
         public int IdTipoMovimiento { get; set; }
 
-        public virtual Cuenta Cuenta { get; set; }
+        [ForeignKey("IdCuenta")]
+        public Cuenta Cuenta { get; set; }
 
-        public virtual TipoMovimiento TipoMovimiento { get; set; }
+        [ForeignKey("IdTipoMovimiento")]
+        public TipoMovimiento TipoMovimiento { get; set; }
+
+        public Movimiento()
+        {
+            this.Cuenta = new Cuenta();
+            this.TipoMovimiento = new TipoMovimiento();
+        }
     }
 }

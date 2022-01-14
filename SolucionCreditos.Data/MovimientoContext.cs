@@ -19,7 +19,16 @@ namespace SolucionCreditos.Data
         {
             using (var contexto = new SolucionCreditoContext())
             {
-                return contexto.Movimientos.Select(c => c).ToList();
+                var movimientos = contexto.Movimientos
+                    .Select(c => c).ToList();
+
+                movimientos.ForEach(movimiento => {
+                        movimiento.TipoMovimiento = contexto.TipoMovimientos.Where(mov => mov.IdTipoMovimiento == movimiento.IdTipoMovimiento).Select(p => p).FirstOrDefault();
+                    movimiento.Cuenta = contexto.Cuentas.Where(mov => mov.IdCuenta == movimiento.IdCuenta).Select(p => p).FirstOrDefault();
+                });
+
+                return movimientos;
+                
             }
         }
 
@@ -27,7 +36,13 @@ namespace SolucionCreditos.Data
         {
             using (var contexto = new SolucionCreditoContext())
             {
-                return contexto.Movimientos.Where(m => m.IdCuenta == idCuenta).Select(c => c).ToList();
+                var movimientos = contexto.Movimientos.Where(m => m.IdCuenta == idCuenta).Select(c => c).ToList();
+                movimientos.ForEach(movimiento => {
+                    movimiento.TipoMovimiento = contexto.TipoMovimientos.Where(mov => mov.IdTipoMovimiento == movimiento.IdTipoMovimiento).Select(p => p).FirstOrDefault();
+                    movimiento.Cuenta = contexto.Cuentas.Where(mov => mov.IdCuenta == movimiento.IdCuenta).Select(p => p).FirstOrDefault();
+                });
+
+                return movimientos;
             }
         }
 
@@ -35,7 +50,14 @@ namespace SolucionCreditos.Data
         {
             using (var contexto = new SolucionCreditoContext())
             {
-                return contexto.Movimientos.Where(t => t.IdTipoMovimiento == idTipo).Select(c => c).ToList();
+                var movimientos = contexto.Movimientos.Where(t => t.IdTipoMovimiento == idTipo).Select(c => c).ToList();
+
+                movimientos.ForEach(movimiento => {
+                    movimiento.TipoMovimiento = contexto.TipoMovimientos.Where(mov => mov.IdTipoMovimiento == movimiento.IdTipoMovimiento).Select(p => p).FirstOrDefault();
+
+                });
+
+                return movimientos;
             }
         }
 
@@ -43,7 +65,14 @@ namespace SolucionCreditos.Data
         {
             using (var contexto = new SolucionCreditoContext())
             {
-                return contexto.Movimientos.Where(m => m.IdTipoMovimiento == idTipo && m.IdCuenta == idCuenta).Select(c => c).ToList();
+                var movimientos = contexto.Movimientos.Where(m => m.IdTipoMovimiento == idTipo && m.IdCuenta == idCuenta).Select(c => c).ToList();
+
+                movimientos.ForEach(movimiento => {
+                    movimiento.TipoMovimiento = contexto.TipoMovimientos.Where(mov => mov.IdTipoMovimiento == movimiento.IdTipoMovimiento).Select(p => p).FirstOrDefault();
+                    movimiento.Cuenta = contexto.Cuentas.Where(mov => mov.IdCuenta == movimiento.IdCuenta).Select(p => p).FirstOrDefault();
+                });
+
+                return movimientos;
             }
         }
 
@@ -51,7 +80,18 @@ namespace SolucionCreditos.Data
         {
             using (var contexto = new SolucionCreditoContext())
             {
-                contexto.Movimientos.Add(movimiento);
+
+                Movimiento mov = new Movimiento()
+                {
+                    IdCuenta = movimiento.IdCuenta,
+                    Cuenta = contexto.Cuentas.Where(i => i.IdCuenta == movimiento.IdCuenta).Select(c => c).FirstOrDefault(),
+                    IdMovimiento = movimiento.IdMovimiento,
+                    IdTipoMovimiento = movimiento.IdTipoMovimiento,
+                    TipoMovimiento = contexto.TipoMovimientos.Where(i => i.IdTipoMovimiento == movimiento.IdTipoMovimiento).Select(c => c).FirstOrDefault(),
+                    Monto = movimiento.Monto
+                };
+
+                contexto.Movimientos.Add(mov);
                 contexto.SaveChanges();
             }
         }

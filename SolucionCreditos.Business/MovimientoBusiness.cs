@@ -2,7 +2,6 @@
 using SolucionCreditos.Entities;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SolucionCreditos.Business
 {
@@ -15,24 +14,50 @@ namespace SolucionCreditos.Business
             this.movimientoContext = new MovimientoContext();
         }
 
-        public Movimiento ObtenerMovimiento(int idTipoMovimiento)
+        public Movimiento ObtenerMovimiento(int idMovimiento)
         {
-            return this.movimientoContext.ObtenerMovimiento(idTipoMovimiento);
+            return movimientoContext.ObtenerMovimiento(idMovimiento);
         }
 
-        public List<Movimiento> ListarMovimiento()
+        public List<Movimiento> ListarMovimientos()
         {
-            return this.movimientoContext.ListarMovimientos();
+            return movimientoContext.ListarMovimientos();
         }
 
-        public List<Movimiento> ListarMovimiento(int idTipo)
+        public List<Movimiento> ListarMovimientosPorCuenta(Int64 idCuenta)
         {
-            return this.movimientoContext.ListarMovimientosPorTipo(idTipo);
+            return movimientoContext.ListarMovimientosPorCuenta(idCuenta);
         }
 
-        public void GuardarMovimiento(Movimiento tipoMovimiento)
+        public List<Movimiento> ListarMovimientosPorTipo(int idTipo)
         {
-            this.movimientoContext.CrearMovimiento(tipoMovimiento);
+            return movimientoContext.ListarMovimientosPorTipo(idTipo);
+        }
+
+        public List<Movimiento> ListarMovimientosPorCuentaYTipo(Int64 idCuenta, int idTipo)
+        {
+            return movimientoContext.ListarMovimientosPorCuentaYTipo(idCuenta, idTipo);
+        }
+
+        public void CrearMovimiento(Movimiento movimiento)
+        {
+            CuentaBusiness cuentaBusiness = new CuentaBusiness();
+            Cuenta cuenta = cuentaBusiness.ListarCuentasPorIdCuenta(movimiento.IdCuenta);
+
+            TipoMovimientoBusiness tipoMovimientoBusiness = new TipoMovimientoBusiness();
+            TipoMovimiento tipoMovimiento = tipoMovimientoBusiness.ObtenerTipoMovimiento(movimiento.IdTipoMovimiento);
+
+            if (tipoMovimiento.Deposito)
+            {
+                cuenta.Saldo = cuenta.Saldo + movimiento.Monto;               
+            }
+            else
+            {
+                cuenta.Saldo = cuenta.Saldo - movimiento.Monto;
+            }
+
+            movimientoContext.CrearMovimiento(movimiento);
+            cuentaBusiness.ActualizarCuenta(cuenta);
         }
     }
 }

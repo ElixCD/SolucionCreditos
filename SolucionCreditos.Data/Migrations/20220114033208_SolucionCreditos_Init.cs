@@ -2,7 +2,7 @@
 
 namespace SolucionCreditos.Data.Migrations
 {
-    public partial class SolucionesCreditoDB : Migration
+    public partial class SolucionCreditos_Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,7 +26,8 @@ namespace SolucionCreditos.Data.Migrations
                 {
                     IdTipoMovimiento = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nombre = table.Column<string>(nullable: false)
+                    Concepto = table.Column<string>(nullable: false),
+                    Deposito = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -60,7 +61,7 @@ namespace SolucionCreditos.Data.Migrations
                 {
                     IdMovimiento = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Monto = table.Column<decimal>(nullable: false),
+                    Monto = table.Column<double>(nullable: false),
                     IdCuenta = table.Column<long>(nullable: false),
                     IdTipoMovimiento = table.Column<int>(nullable: false)
                 },

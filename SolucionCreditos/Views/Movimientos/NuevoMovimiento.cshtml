@@ -1,0 +1,34 @@
+﻿
+@model MovimientoViewModel
+
+@{
+    Int64 idCuenta = ViewBag.idCuenta;
+}
+
+<form method="post">
+    <div class="form-group">
+        <label>IdCuenta</label>
+        <label asp-for="@Model.Movimiento.IdCuenta">@ViewBag.idCuenta</label>
+        <input type="hidden" asp-for="@Model.Movimiento.IdCuenta" value="@ViewBag.idCuenta" />
+    </div>
+
+    <div class="form-group">
+        <label>Concepto</label>
+        <select asp-for="@Model.Movimiento.IdTipoMovimiento" required>
+            <option> Seleccione una opcion </option>
+            @foreach (var item in Model.TipoMovimiento)
+            {
+                <option value="@item.IdTipoMovimiento">@item.Concepto</option>
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label>Monto</label>
+        <input type="text" asp-for="@Model.Movimiento.Monto" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a class="btn btn-primary" asp-action="Index" asp-route-id="@ViewBag.idCuenta">Cancelar</a>
+
+</form>

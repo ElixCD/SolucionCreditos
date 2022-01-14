@@ -7,17 +7,12 @@
     <div>
         <div class="form-group">
             <label>Nombre</label>
-            <input class="form-control" asp-for="Nombre" />
+            <input class="form-control" asp-for="Concepto" required/>
         </div>
 
         <div class="form-group">
-            <label>Movimiento</label>
-            <select class="custom-select" asp-for="Entrada">
-                <option value="">--Seleccione--</option>
-                <option value="0">Salida</option>
-                <option value="1">Entrada</option>
-            </select>
-            @*<input class="form-control" asp-for="Entrada" />*@
+            <label>Entrada de capital</label>
+            <input type="checkbox" asp-for="Deposito" />
         </div>
 
         <button type="submit" class="btn btn-primary">Guardar</button>

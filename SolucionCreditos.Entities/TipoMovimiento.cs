@@ -11,9 +11,16 @@ namespace SolucionCreditos.Entities
         public int IdTipoMovimiento { get; set; }
 
         [Required]
-        public string Nombre { get; set; }
+        public string Concepto { get; set; }
 
         [Required]
-        public bool Entrada { get; set; }
+        public bool Deposito { get; set; }
+
+        public List<Movimiento> Movimientos { get; set; }
+
+        public TipoMovimiento()
+        {
+            this.Movimientos = new List<Movimiento>();
+        }
     }
 }
