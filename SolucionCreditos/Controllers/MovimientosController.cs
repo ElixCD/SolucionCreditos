@@ -50,8 +50,8 @@ namespace SolucionCreditos.Controllers
             ViewBag.idCliente = idCliente;
 
             MovimientoBusiness movimientoBusiness = new MovimientoBusiness();
-            movimientoBusiness.CrearMovimiento(movimientoViewModel.Movimiento);
-
+            ViewBag.Exito = movimientoBusiness.CrearMovimiento(movimientoViewModel.Movimiento);
+            
             List<Movimiento> movimientos = movimientoBusiness.ListarMovimientosPorCuenta(idCuenta).Select(p => p).ToList();
 
             return View("Index", movimientos);

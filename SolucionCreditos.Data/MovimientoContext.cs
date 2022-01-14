@@ -76,23 +76,36 @@ namespace SolucionCreditos.Data
             }
         }
 
-        public void CrearMovimiento(Movimiento movimiento)
+        /**
+         * 
+         * @returns 0 si exito y -1 si ha ocurrido un error
+         **/
+        public int CrearMovimiento(Movimiento movimiento)
         {
             using (var contexto = new SolucionCreditoContext())
             {
-
-                Movimiento mov = new Movimiento()
+                try
                 {
-                    IdCuenta = movimiento.IdCuenta,
-                    Cuenta = contexto.Cuentas.Where(i => i.IdCuenta == movimiento.IdCuenta).Select(c => c).FirstOrDefault(),
-                    IdMovimiento = movimiento.IdMovimiento,
-                    IdTipoMovimiento = movimiento.IdTipoMovimiento,
-                    TipoMovimiento = contexto.TipoMovimientos.Where(i => i.IdTipoMovimiento == movimiento.IdTipoMovimiento).Select(c => c).FirstOrDefault(),
-                    Monto = movimiento.Monto
-                };
+                    Movimiento mov = new Movimiento()
+                    {
+                        IdCuenta = movimiento.IdCuenta,
+                        Cuenta = contexto.Cuentas.Where(i => i.IdCuenta == movimiento.IdCuenta).Select(c => c).FirstOrDefault(),
+                        IdMovimiento = movimiento.IdMovimiento,
+                        IdTipoMovimiento = movimiento.IdTipoMovimiento,
+                        TipoMovimiento = contexto.TipoMovimientos.Where(i => i.IdTipoMovimiento == movimiento.IdTipoMovimiento).Select(c => c).FirstOrDefault(),
+                        Monto = movimiento.Monto
+                    };
 
-                contexto.Movimientos.Add(mov);
-                contexto.SaveChanges();
+                    contexto.Movimientos.Add(mov);
+                    contexto.SaveChanges();
+
+                    return 0;
+                }
+                catch (Exception)
+                {
+                    return -1; 
+                }
+                
             }
         }
     }

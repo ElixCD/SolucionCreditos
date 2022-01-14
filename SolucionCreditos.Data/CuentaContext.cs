@@ -39,23 +39,48 @@ namespace SolucionCreditos.Data
             }
         }
 
-        public void NuevaCuenta(Cuenta cuenta)
+        /**
+         * @returns 0 si exito y -1 si ha ocurrido un error
+         **/
+        public int NuevaCuenta(Cuenta cuenta)
         {
-            using (var contexto = new SolucionCreditoContext())
+            try
             {
-                contexto.Cuentas.Add(cuenta);
-                contexto.SaveChanges();
+                using (var contexto = new SolucionCreditoContext())
+                {
+                    contexto.Cuentas.Add(cuenta);
+                    contexto.SaveChanges();
+                }
+                return 0;
             }
+            catch (Exception)
+            {
+                return -1;
+            }
+            
         }
 
-        public void ActualizarCuenta(Cuenta cuenta)
+        /**
+         * returns 0 si exito y -1 si ha ocurrido un error
+         **/
+        public int ActualizarCuenta(Cuenta cuenta)
         {
-            using (var contexto = new SolucionCreditoContext())
+            try
             {
-                Cuenta current = contexto.Cuentas.Where(c => c.IdCuenta == cuenta.IdCuenta).FirstOrDefault();
-                current.Saldo = cuenta.Saldo;
-                contexto.SaveChanges();
+                using (var contexto = new SolucionCreditoContext())
+                {
+                    Cuenta current = contexto.Cuentas.Where(c => c.IdCuenta == cuenta.IdCuenta).FirstOrDefault();
+                    current.Saldo = cuenta.Saldo;
+                    contexto.SaveChanges();
+                }
+
+                return 0;
             }
+            catch (Exception)
+            {
+                return -1;
+            }
+            
         }
 
     }

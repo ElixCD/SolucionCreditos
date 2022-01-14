@@ -39,8 +39,13 @@ namespace SolucionCreditos.Business
             return movimientoContext.ListarMovimientosPorCuentaYTipo(idCuenta, idTipo);
         }
 
-        public void CrearMovimiento(Movimiento movimiento)
+        /**
+         * param name="movimiento"
+         * returns 0 si exito, 1 si es una operación no valida y -1 si ha ocurrido un error
+         **/
+        public int CrearMovimiento(Movimiento movimiento)
         {
+            int salida = 0;
             CuentaBusiness cuentaBusiness = new CuentaBusiness();
             Cuenta cuenta = cuentaBusiness.ListarCuentasPorIdCuenta(movimiento.IdCuenta);
 
@@ -53,11 +58,19 @@ namespace SolucionCreditos.Business
             }
             else
             {
-                cuenta.Saldo = cuenta.Saldo - movimiento.Monto;
+                if (cuenta.Saldo < movimiento.Monto) 
+                    salida = 1;
+                else
+                    cuenta.Saldo = cuenta.Saldo - movimiento.Monto;
             }
 
-            movimientoContext.CrearMovimiento(movimiento);
-            cuentaBusiness.ActualizarCuenta(cuenta);
+            if(salida == 0)
+            {
+                salida = movimientoContext.CrearMovimiento(movimiento);
+                salida = cuentaBusiness.ActualizarCuenta(cuenta);
+            }
+            
+            return 0;
         }
     }
 }

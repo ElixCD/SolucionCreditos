@@ -36,15 +36,21 @@ namespace SolucionCreditos.Business
             return cuentaContext.ListarCuentasPorIdCuenta(idCuenta);
         }
 
-        public void GuardarCuenta(Cuenta cuenta, Int64 idCliente)
+        /**
+         * returns 0 si exito y -1 si ha ocurrido un error
+         **/
+        public int GuardarCuenta(Cuenta cuenta, Int64 idCliente)
         {
             cuenta.IdCliente = idCliente;
-            this.cuentaContext.NuevaCuenta(cuenta);
+            return this.cuentaContext.NuevaCuenta(cuenta);
         }
 
-        public void ActualizarCuenta(Cuenta cuenta)
+        /**
+         * returns 0 si exito y -1 si ha ocurrido un error
+         **/
+        public int ActualizarCuenta(Cuenta cuenta)
         {
-            this.cuentaContext.ActualizarCuenta(cuenta);
+            return this.cuentaContext.ActualizarCuenta(cuenta);
         }
     }
 }
